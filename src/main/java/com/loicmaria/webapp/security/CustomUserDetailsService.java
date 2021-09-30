@@ -1,16 +1,6 @@
 package com.loicmaria.webapp.security;
 
-import java.util.Collection;
 
-
-import com.loicmaria.webapp.model.User;
-import com.loicmaria.webapp.proxy.UserProxy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 

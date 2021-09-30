@@ -1,0 +1,91 @@
+/**************** General ****************/
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+body
+{
+    color:black;
+    background-color:white;
+    background-repeat:no-repeat;
+}
+
+
+
+header
+{
+    height: 80px;
+}
+
+.footer{
+    background:#000000;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    padding-top:50px;
+    height:60px;
+    color: #FFFFFF;
+}
+
+
+a.btn
+{
+    color: white;
+}
+
+div.form-group.row
+{
+    margin: 0 0 15px;
+}
+
+h2{
+    font-size: medium;
+    text-align: center;
+}
+
+/**************** Topo ****************/
+
+/** Create Topo **/
+
+td.topoDescription{
+    text-align: justify;
+    overflow: auto;
+    word-break: break-all;
+}
+
+
+/**************** Climbing site ****************/
+
+/** Get climbing site **/
+div.margin-bottom{
+    margin-bottom: 100px;
+}
+
+/** Details climbing site **/
+img.official-tag
+{
+    width: 30%;
+    float: right;
+}
+
+div.card-title-climbing-site
+{
+    margin: 0;
+}
+
+div.btn-climbing-site
+{
+    display: flex;
+}
+
+/* Comment */
+div.comments{
+    margin-bottom: 100px;
+}
+
+h2.card-title-comment
+{
+    font-size: medium;
+    text-align: center;
+}
