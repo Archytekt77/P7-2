@@ -1,0 +1,48 @@
+/**************** General ****************/
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+body
+{
+    color:black;
+    background-color:white;
+    background-repeat:no-repeat;
+}
+
+div.item
+{
+    margin-bottom: 100px;
+}
+
+header
+{
+    height: 80px;
+}
+
+.footer{
+    background:#000000;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    padding-top:50px;
+    height:60px;
+    color: #FFFFFF;
+}
+
+
+a.btn
+{
+    color: white;
+}
+
+div.form-group.row
+{
+    margin: 0 0 15px;
+}
+
+h2{
+    font-size: medium;
+    text-align: center;
+}

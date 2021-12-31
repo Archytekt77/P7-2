@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+
+<th:block th:fragment="searchSystem">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Chercher un livre</h1>
+                    <form class="form-inline" action="detailsClimbingSite.html"
+                          th:action="@{/books/${searchBook.title}/${searchBook.language}}"
+                          th:object="${searchBook}" method="post">
+                        <div class="form-group mb-2">
+                            <label class="sr-only">Titre</label>
+                            <input class="form-control" type="text" th:field="*{title}" placeholder="Titre" required>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label class="sr-only">Langue</label>
+                            <input class="form-control" type="text" th:field="*{language}" placeholder="Langue" required>
+                        </div>
+                        <button type="submit" class="btn btn-success mb-2">Chercher</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="form">
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="title">Titre</label>
+        <input class="col-6 form-control" type="text" id="title" th:field="*{title}" required>
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="collection">Collection</label>
+        <input class="col-6 form-control" type="text" id="collection" th:field="*{collection}">
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="summary">Résumé</label>
+        <textarea class="col-6 form-control" id="summary" rows="3" type="text" th:field="*{summary}"></textarea>
+
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="language">Langue</label>
+        <input class="col-6 form-control" type="text" id="language" th:field="*{language}" required>
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="publicationDate">Date de parution</label>
+        <input class="col-6 form-control" type="text" id="publicationDate" th:field="*{publicationDate}">
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label">Auteur</label>
+        <select th:field="*{idAuthor}">
+            <option th:value="0" selected>Aucun</option>
+            <option th:each="author : ${authorsList}" th:value="${author.id}" th:text="${author.firstName} + ' ' + ${author.lastName}"></option>
+        </select>
+    </div>
+</th:block>
+
+
+<th:block th:fragment="table">
+    <table class="table table-dark table-responsive-md">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Langage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book, iter : ${objectList}">
+            <td scope="row" th:hidden="${book.id}"></td>
+            <th th:text="${iter.count}"></th>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.language}"></td>
+            <td class="justify-content-center">
+                <a role="button" class="btn btn-primary"
+                   th:href="@{/books/details(id=${book.id})}">Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<th:block th:fragment="detailsTable">
+    <thead>
+    <tr>
+        <th th:hidden="*{id}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Titre</th>
+        <td th:text="*{title}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Collection</th>
+        <td th:text="*{collection}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Résumé</th>
+        <td th:text="*{summary}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Langage</th>
+        <td th:text="*{language}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Date de parution</th>
+        <td th:text="*{publicationDate}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Auteur</th>
+        <td th:text="*{author.firstName + ', ' + author.lastName}"></td>
+    </tr>
+    </tbody>
+
+</th:block>
+
+
+
+
+</html>

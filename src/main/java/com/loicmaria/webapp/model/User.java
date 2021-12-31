@@ -2,6 +2,8 @@ package com.loicmaria.webapp.model;
 
 import lombok.Data;
 
+import java.util.Collection;
+
 @Data
 public class User {
 
@@ -12,6 +14,10 @@ public class User {
     private String mail;
 
     private String password;
+
+    private Role role;
+
+    private Collection<Loan> loanCollection;
 
 
 }

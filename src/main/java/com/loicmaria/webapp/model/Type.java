@@ -10,10 +10,6 @@ public class Type {
 
     private String name;
 
-    protected void prePersist() {
-        if (this.createDate == null) createDate = LocalDateTime.now();
-    }
-
     private LocalDateTime createDate;
 
     private LocalDateTime updateDate;

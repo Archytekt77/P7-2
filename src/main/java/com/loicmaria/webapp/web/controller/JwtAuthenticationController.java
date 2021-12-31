@@ -16,7 +16,6 @@ public class JwtAuthenticationController {
 
     @PostMapping("/authenticate")
     public String login(){
-        System.out.println("login");
 
         JwtRequest jwtRequest = new JwtRequest();
         jwtRequest.setUsername("test");

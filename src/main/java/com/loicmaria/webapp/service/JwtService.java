@@ -2,6 +2,7 @@ package com.loicmaria.webapp.service;
 
 import com.loicmaria.webapp.model.JwtRequest;
 import com.loicmaria.webapp.model.JwtResponse;
+import com.loicmaria.webapp.model.User;
 import com.loicmaria.webapp.proxies.ApiProxy;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class JwtService{
     ApiProxy apiProxy;
 
     private JwtResponse jwtResponse;
+
+    private User user;
 
     public JwtResponse createAuthenticationToken(JwtRequest jwtRequest){
         jwtResponse = apiProxy.createAuthenticationToken(jwtRequest);

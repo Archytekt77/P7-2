@@ -12,11 +12,11 @@ public class Loan {
 
     private boolean extraTime;
 
-    protected void prePersist() {
-        if (this.createDate == null) createDate = LocalDateTime.now();
-    }
-
     private LocalDateTime createDate;
 
     private LocalDateTime updateDate;
+
+    private Book book;
+
+    private User user;
 }

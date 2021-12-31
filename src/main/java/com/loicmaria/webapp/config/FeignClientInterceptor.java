@@ -18,11 +18,8 @@ public class FeignClientInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
-        System.out.println("here");
-
         if(jwtService.getJwtResponse() != null){
-            requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, jwtService.getJwtResponse()));
-            System.out.println("TOKEN : " + requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, jwtService.getJwtResponse())));
+            requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, jwtService.getJwtResponse().getJwtToken()));
         }
 
     }

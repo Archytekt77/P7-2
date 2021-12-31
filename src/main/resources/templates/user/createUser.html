@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <div th:replace="fragments/general :: head"></div>
+
+  <title>Création utilisateur</title>
+</head>
+
+<body>
+<header>
+  <div th:replace="fragments/general :: nav"></div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-dark mb-3">
+        <div class="card-body">
+          <h1 class="card-title">Création de votre profil</h1>
+          <form th:action="@{/users/create}" th:object="${user}" method="post">
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Prénom</label>
+              <input class="col-6 form-control" type="text" th:field="*{username}" required>
+            </div>
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Email</label>
+              <input class="col-6 form-control" type="email" th:field="*{mail}" required>
+            </div>
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Mot de passe</label>
+              <input class="col-6 form-control" type="password" th:field="*{password}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+</body>
+</html>

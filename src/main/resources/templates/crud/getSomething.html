@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <div th:replace="fragments/general :: head"></div>
+
+  <title th:text="'Liste ' + ${title}">Liste auteurs</title>
+</head>
+
+<body>
+<header>
+  <div th:replace="fragments/general :: nav"></div>
+</header>
+
+<div class="container">
+
+  <div th:if="${searchSystem == 'ok'}">
+    <div th:replace="${fragment} :: searchSystem"></div>
+  </div>
+
+  <div class="row justify-content-center item">
+    <div class="col-12">
+      <div class="card border-dark mb-3">
+        <div class="card-body">
+          <h1 class="card-title">Liste <span th:text="${title}"></span>
+            <a role="button" class="btn btn-secondary"
+               th:href="@{'/' + ${URL} + '/create'}">Ajouter</a></h1>
+          <p class="card-text">
+
+          <div th:replace="${fragment} :: table"></div>
+
+
+          <div th:if="${objectList.isEmpty()}" th:text="'Aucun ' + ${title}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>

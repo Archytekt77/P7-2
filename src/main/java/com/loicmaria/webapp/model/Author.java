@@ -2,6 +2,7 @@ package com.loicmaria.webapp.model;
 
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Data
 public class Author {
@@ -12,11 +13,9 @@ public class Author {
 
     private String lastName;
 
-    protected void prePersist() {
-        if (this.createDate == null) createDate = LocalDateTime.now();
-    }
-
     private LocalDateTime createDate;
 
     private LocalDateTime updateDate;
+
+    private Collection<Book> bookCollection;
 }

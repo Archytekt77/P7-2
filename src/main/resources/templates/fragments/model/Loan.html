@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="form">
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="status">Status</label>
+        <input class="col-6 form-control" type="text" id="status" th:field="*{status}" required>
+    </div>
+    <div class="form-group row">
+        <label class="col-6 col-form-label" for="extraTime">Temps supplémentaire</label>
+        <input class="col-6 form-control" type="checkbox" id="extraTime" th:field="*{extraTime}">
+    </div>
+</th:block>
+
+<th:block th:fragment="table">
+    <table class="table table-dark table-responsive-md">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Status</th>
+            <th scope="col">Temps supplémentaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="loan, iter : ${objectList}">
+            <td scope="row" th:hidden="${loan.id}"></td>
+            <th th:text="${iter.count}"></th>
+            <td th:text="${loan.status}"></td>
+            <td th:text="${loan.extratime}"></td>
+            <td class="justify-content-center">
+                <a role="button" class="btn btn-primary"
+                   th:href="@{/copies/details(id=${copy.id})}">Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<th:block th:fragment="detailsTable">
+    <thead>
+    <tr>
+        <th th:hidden="*{id}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Status</th>
+        <td th:text="*{status}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Temps supplémentaire</th>
+        <td th:text="*{extraTime}"></td>
+    </tr>
+    </tbody>
+</th:block>
+
+
+</html>
