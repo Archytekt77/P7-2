@@ -21,6 +21,8 @@ public class JwtService{
 
     public JwtResponse createAuthenticationToken(JwtRequest jwtRequest){
         jwtResponse = apiProxy.createAuthenticationToken(jwtRequest);
+        this.user = jwtResponse.getUser();
+        System.out.println(jwtResponse);
         return jwtResponse;
     }
 

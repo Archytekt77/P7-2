@@ -23,8 +23,8 @@ public class CopyService {
         copy.setCopies(copyForm.getCopies());
         copy.setPublisherName(copyForm.getPublisherName());
         copy.setPublicationDate(this.convertDateFormToDate(copyForm));
-        copy.setBookDto(apiProxy.getBook(copyForm.getIdBook()));
-        copy.setTypeDto(apiProxy.getType(copyForm.getIdType()));
+        copy.setBook(apiProxy.getBook(copyForm.getIdBook()));
+        copy.setType(apiProxy.getType(copyForm.getIdType()));
 
         return copy;
     }

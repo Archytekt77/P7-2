@@ -26,17 +26,11 @@ public class BookController {
         model.addAttribute("title", "Livre");
         model.addAttribute("URL", "books");
         model.addAttribute("fragment", "fragments/model/book");
-
-
     }
 
     //Create
     @GetMapping("/create")
     public String createBook(Model model){
-
-        String searchSystem = null;
-
-        model.addAttribute("searchSystem", searchSystem);
         model.addAttribute("object", new BookForm());
         model.addAttribute("authorsList", authorService.getAuthors());
         return "crud/createSomething";
@@ -60,9 +54,6 @@ public class BookController {
     //Get all
     @GetMapping
     public String getBooks(Model model){
-        model.addAttribute("searchBook", new Book());
-        String searchSystem = "ok";
-        model.addAttribute("searchSystem", searchSystem);
         model.addAttribute("objectList", bookService.getBooks());
         return "crud/getSomething";
     }
@@ -85,7 +76,6 @@ public class BookController {
 
         System.out.println("Book : " + book);
 
-        model.addAttribute("searchSystem", true);
         model.addAttribute("searchBook", book);
         model.addAttribute("bookList", bookService.findByTitleAndLanguage(title, language));
         return "crud/getSomething";
@@ -94,7 +84,8 @@ public class BookController {
     //Update
     @GetMapping("/edition")
     public String editionBook(@RequestParam(value = "id") int id, Model model){
-        model.addAttribute("object", bookService.getBook(id));
+        BookForm bookForm = bookService.convertBookToBookForm(bookService.getBook(id));
+        model.addAttribute("object", bookForm);
         model.addAttribute("authorsList", authorService.getAuthors());
         return "crud/editionSomething";
     }

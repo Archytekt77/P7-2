@@ -22,9 +22,9 @@ public class Copy {
 
     private LocalDateTime updateDate;
 
-    private Book bookDto;
+    private Book book;
 
-    private Type typeDto;
+    private Type type;
 
 
 }

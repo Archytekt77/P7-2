@@ -5,6 +5,8 @@ import com.loicmaria.webapp.model.User;
 import com.loicmaria.webapp.proxies.ApiProxy;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -48,8 +50,14 @@ public class UserService {
         apiProxy.deleteUser(id);
     }
 
-    /*public User getLoggedUser(int id){
-        return
-    }*/
+    public User getLoggedUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        User user = apiProxy.getLoggedUser(userName);
+        if(user != null){
+            return user;
+        }
+        return null;
+    }
 
 }

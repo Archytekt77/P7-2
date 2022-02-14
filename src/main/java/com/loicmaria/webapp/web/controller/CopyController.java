@@ -27,7 +27,6 @@ public class CopyController {
         model.addAttribute("title", "Exemplaire");
         model.addAttribute("URL", "copies");
         model.addAttribute("fragment", "fragments/model/copy");
-        model.addAttribute("searchSystem", false);
     }
 
     //Create

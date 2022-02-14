@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -25,34 +26,44 @@ public class BookService {
         book.setCollection(bookForm.getCollection());
         book.setSummary(bookForm.getSummary());
         book.setLanguage(bookForm.getLanguage());
-        book.setPublicationDate(this.convertDateFormToDate(bookForm));
-        book.setAuthorDto(apiProxy.getAuthor(bookForm.getIdAuthor()));
+        book.setPublicationDate(this.convertStringToDate(bookForm));
+        book.setAuthor(apiProxy.getAuthor(bookForm.getIdAuthor()));
 
         return book;
     }
 
-    /*public BookForm convertBookToBookForm (Book book){
+    public BookForm convertBookToBookForm (Book book){
         BookForm bookForm = new BookForm();
 
         bookForm.setTitle(book.getTitle());
-        bookForm.
+        bookForm.setCollection(book.getCollection());
+        bookForm.setSummary(book.getSummary());
+        bookForm.setLanguage(book.getLanguage());
+        bookForm.setPublicationDate(this.convertDateToString(book));
+        bookForm.setIdAuthor(book.getAuthor().getId());
 
-    }*/
+        return bookForm;
+    }
 
-    public Date convertDateFormToDate(BookForm bookForm){
+    public Date convertStringToDate(BookForm bookForm){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-
             Date date = formatter.parse(bookForm.getPublicationDate());
-
             return date;
-
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
         }
+    }
 
+    public String convertDateToString(Book book){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = book.getPublicationDate();
+
+        String dateToStr = dateFormat.format(date);
+
+        return dateToStr;
     }
 
     public Book createBook(BookForm bookForm){

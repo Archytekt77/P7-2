@@ -27,7 +27,7 @@ public class Book {
 
     private LocalDateTime updateDate;
 
-    private Author authorDto;
+    private Author author;
 
     private Collection<Copy> copyCollection;
 }

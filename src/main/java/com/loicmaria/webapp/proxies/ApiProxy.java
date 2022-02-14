@@ -261,5 +261,8 @@ public interface ApiProxy{
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     void deleteUser(@PathVariable("id") int id);
 
+    @RequestMapping(value = "/users/{userName}", method = RequestMethod.GET)
+    User getLoggedUser(@PathVariable("userName") String userName);
+
 
 }
