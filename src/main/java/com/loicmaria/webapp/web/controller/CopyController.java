@@ -1,7 +1,6 @@
 package com.loicmaria.webapp.web.controller;
 
 import com.loicmaria.webapp.model.Copy;
-import com.loicmaria.webapp.form.CopyForm;
 import com.loicmaria.webapp.service.BookService;
 import com.loicmaria.webapp.service.CopyService;
 import com.loicmaria.webapp.service.TypeService;
@@ -29,22 +28,6 @@ public class CopyController {
         model.addAttribute("fragment", "fragments/model/copy");
     }
 
-    //Create
-    @GetMapping("/create")
-    public String createCopy(Model model){
-        model.addAttribute("object", new CopyForm());
-        model.addAttribute("booksList", bookService.getBooks());
-        model.addAttribute("typesList", typeService.getTypes());
-        return "crud/createSomething";
-    }
-
-    @PostMapping("/create")
-    public String addCopy(@ModelAttribute CopyForm copyForm, Model model) {
-        System.out.println("Exemplaire : " + copyForm);
-        copyService.createCopy(copyForm);
-        model.addAttribute("objectList", copyService.getCopies());
-        return "crud/getSomething";
-    }
 
     //Get by ID
     @GetMapping("/details")
@@ -72,18 +55,11 @@ public class CopyController {
     }
 
     @PostMapping("/edition/{id}")
-    public String updateCopy(@PathVariable(value = "id") int id, Model model, CopyForm copyForm){
-        copyService.updateCopy(id, copyForm);
+    public String updateCopy(@PathVariable(value = "id") int id, Model model, Copy copy){
+        copyService.updateCopy(id, copy);
         model.addAttribute("object", copyService.getCopy(id));
         return "crud/detailsSomething";
     }
 
-    //Delete
-    @GetMapping("/delete")
-    public String deleteCopy(@RequestParam(value = "id") int id, Model model){
-        model.addAttribute("object", copyService.getCopy(id));
-        copyService.deleteCopy(id);
-        return "crud/deleteSomething";
-    }
 
 }

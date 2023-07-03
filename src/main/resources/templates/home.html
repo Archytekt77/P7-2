@@ -24,6 +24,10 @@
                     </div>
                 </div>
             </div>
+            <div>
+                Hello <span th:text="${#authentication.name}"></span> !
+                Voici ton role : <span th:text="${#authentication.getPrincipal()}"></span>
+            </div>
         </div>
     </div>
 </div>

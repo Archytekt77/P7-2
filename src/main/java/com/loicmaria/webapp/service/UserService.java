@@ -5,6 +5,7 @@ import com.loicmaria.webapp.model.User;
 import com.loicmaria.webapp.proxies.ApiProxy;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class UserService {
     @Autowired
     ApiProxy apiProxy;
 
+
     public User convertUserFormToUser(UserForm userForm){
         User user = new User();
         user.setUsername(userForm.getUsername());
@@ -27,10 +29,8 @@ public class UserService {
         return user;
     }
 
-    public User createUser(UserForm userForm){
+    public void createUser(UserForm userForm){
         User user = this.convertUserFormToUser(userForm);
-        System.out.println("User : " + user);
-        return apiProxy.createUser(user);
     }
 
     public User getUser(int id) {
@@ -50,14 +50,5 @@ public class UserService {
         apiProxy.deleteUser(id);
     }
 
-    public User getLoggedUser(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        User user = apiProxy.getLoggedUser(userName);
-        if(user != null){
-            return user;
-        }
-        return null;
-    }
 
 }

@@ -2,7 +2,6 @@ package com.loicmaria.webapp.proxies;
 
 import com.loicmaria.webapp.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -10,26 +9,7 @@ import java.util.Collection;
 @FeignClient(name = "api", url = "localhost:9000")
 public interface ApiProxy{
 
-    //JWT
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    JwtResponse createAuthenticationToken(@RequestBody JwtRequest authenticationRequest);
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    ResponseEntity<?> saveUser(@RequestBody User user);
-
-    //---------------------------------------------------------------------------
-
     //Author
-
-    /**
-     * Create - Add a new author
-     *
-     * @param author An object author
-     * @return The author object saved
-     */
-    @RequestMapping(value = "/authors", method = RequestMethod.POST)
-    Author createAuthor(@RequestBody Author author);
 
     /**
      * Read - Get one author
@@ -48,30 +28,9 @@ public interface ApiProxy{
     @RequestMapping(value = "/authors", method = RequestMethod.GET)
     Collection<Author> getAuthors();
 
-    /**
-     * Update - Update an existing author
-     *
-     * @param id     - The id of the author to update
-     * @param author - The author object updated
-     * @return The currentAuthor if he is present or null
-     */
-    @RequestMapping(value = "/authors/{id}", method = RequestMethod.PUT)
-    Author updateAuthor(@PathVariable("id") int id, @RequestBody Author author);
-
-    /**
-     * Delete - Delete an author
-     *
-     * @param id - The id of the author to delete
-     */
-    @RequestMapping(value = "/authors/{id}", method = RequestMethod.DELETE)
-    void deleteAuthor(@PathVariable("id") int id);
-
     //---------------------------------------------------------------------------
     
     //Book
-
-    @RequestMapping(value = "/books", method = RequestMethod.POST)
-    Book createBook(@RequestBody Book book);
 
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     Book getBook(@PathVariable("id") int id);
@@ -79,27 +38,12 @@ public interface ApiProxy{
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     Collection<Book> getBooks();
 
-    @RequestMapping(value = "/books/{id}", method = RequestMethod.PUT)
-    Book updateBook(@PathVariable("id") int id, @RequestBody Book book);
-
-    @RequestMapping(value = "/books/{id}", method = RequestMethod.DELETE)
-    void deleteBook(@PathVariable("id") int id);
-
     @RequestMapping(value = "/books/{title}/{language}", method = RequestMethod.GET)
-    Collection<Book> getBooksBySearch(@PathVariable("title") String title, @PathVariable("language") String language5555555555555);
+    Collection<Book> getBooksBySearch(@PathVariable("title") String title);
 
     //---------------------------------------------------------------------------
     
     //Copy
-
-    /**
-     * Create - Add a new copy
-     *
-     * @param copy An object copy
-     * @return The copy object saved
-     */
-    @RequestMapping(value = "/copies", method = RequestMethod.POST)
-    Copy createCopy(@RequestBody Copy copy);
 
     /**
      * Read - Get one copy
@@ -111,12 +55,12 @@ public interface ApiProxy{
     Copy getCopy(@PathVariable("id") int id);
 
     /**
-     * Read - Get all authors
+     * Read - Get all copies
      *
      * @return - An Iterable object of Copy full filled
      */
     @RequestMapping(value = "/copies", method = RequestMethod.GET)
-    Collection<Copy> getCopys();
+    Collection<Copy> getCopies();
 
     /**
      * Update - Update an existing copy
@@ -128,13 +72,6 @@ public interface ApiProxy{
     @RequestMapping(value = "/copies/{id}", method = RequestMethod.PUT)
     Copy updateCopy(@PathVariable("id") int id, @RequestBody Copy copy);
 
-    /**
-     * Delete - Delete an copy
-     *
-     * @param id - The id of the copy to delete
-     */
-    @RequestMapping(value = "/copies/{id}", method = RequestMethod.DELETE)
-    void deleteCopy(@PathVariable("id") int id);
 
     //---------------------------------------------------------------------------
     
@@ -193,15 +130,6 @@ public interface ApiProxy{
     //Type
 
     /**
-     * Create - Add a new type
-     *
-     * @param type An object type
-     * @return The type object saved
-     */
-    @RequestMapping(value = "/types", method = RequestMethod.POST)
-    Type createType(@RequestBody Type type);
-
-    /**
      * Read - Get one type
      *
      * @param id The id of the type
@@ -218,30 +146,9 @@ public interface ApiProxy{
     @RequestMapping(value = "/types", method = RequestMethod.GET)
     Collection<Type> getTypes();
 
-    /**
-     * Update - Update an existing type
-     *
-     * @param id     - The id of the type to update
-     * @param type - The type object updated
-     * @return The currentType if he is present or null
-     */
-    @RequestMapping(value = "/types/{id}", method = RequestMethod.PUT)
-    Type updateType(@PathVariable("id") int id, @RequestBody Type type);
-
-    /**
-     * Delete - Delete an type
-     *
-     * @param id - The id of the type to delete
-     */
-    @RequestMapping(value = "/types/{id}", method = RequestMethod.DELETE)
-    void deleteType(@PathVariable("id") int id);
-
     //---------------------------------------------------------------------------
 
     //User
-
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    User createUser(@RequestBody User user);
 
     /**
      * Read - Get one user
@@ -260,9 +167,5 @@ public interface ApiProxy{
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     void deleteUser(@PathVariable("id") int id);
-
-    @RequestMapping(value = "/users/{userName}", method = RequestMethod.GET)
-    User getLoggedUser(@PathVariable("userName") String userName);
-
 
 }

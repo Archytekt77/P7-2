@@ -1,7 +1,6 @@
 package com.loicmaria.webapp.web.controller;
 
 import com.loicmaria.webapp.form.UserForm;
-import com.loicmaria.webapp.model.User;
 import com.loicmaria.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,18 +13,18 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    /*@Autowired
-    RoleServiceImpl roleService;*/
+
+    @ModelAttribute
+    public void addAttributes(Model model){
+    }
 
     /**
      * Afficher les détails de l'utilisateur connecté.
-     * @param model Contient les données à afficher.
      * @return La page de détails.
      */
 
     @GetMapping("/id")
-    public String getUserById(Model model){
-       // model.addAttribute("user", userService.getLoggedUser());
+    public String getUserById(){
         return "user/detailsUser";
     }
 
@@ -79,6 +78,7 @@ public class UserController {
     public String updateUser(@PathVariable(value = "id") int id, Model model, UserForm userForm){
         userService.updateUser(id, userForm);
         model.addAttribute("user", userService.getUser(id));
+        System.out.println("Édition user");
         return "user/detailsUser";
     }
 

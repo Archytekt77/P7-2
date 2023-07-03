@@ -3,6 +3,7 @@ package com.loicmaria.webapp.model;
 import lombok.Data;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 public class User {
@@ -15,7 +16,7 @@ public class User {
 
     private String password;
 
-    private Role role;
+    private List<Role> roleList;
 
     private Collection<Loan> loanCollection;
 
