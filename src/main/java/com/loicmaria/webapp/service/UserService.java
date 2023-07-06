@@ -31,6 +31,9 @@ public class UserService {
 
     public void createUser(UserForm userForm){
         User user = this.convertUserFormToUser(userForm);
+        System.out.println(user);
+        apiProxy.createUser(user);
+        System.out.println("ok");
     }
 
     public User getUser(int id) {

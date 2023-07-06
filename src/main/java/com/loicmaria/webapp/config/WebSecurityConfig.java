@@ -17,9 +17,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http
+                .headers()
+                    .frameOptions().sameOrigin()
+                    .and()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/", "/js/**", "/css/**", "/images/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/", "/resources/**", "/js/**", "/css/**", "/images/**").permitAll()
                 // prevent spring security from blocking some pages that doesn't require authentication to be access here.
                     .antMatchers("/forgot-password", "/change-password").permitAll()
                     .anyRequest().permitAll()
@@ -30,15 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
+                    .defaultSuccessUrl("/home")
                     .permitAll()
                     .and()
                 // logout configuration
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/home")
-                    .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID")
-                    .clearAuthentication(true)
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                .exceptionHandling();
     }
 }

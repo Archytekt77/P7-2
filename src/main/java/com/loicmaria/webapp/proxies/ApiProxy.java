@@ -2,6 +2,7 @@ package com.loicmaria.webapp.proxies;
 
 import com.loicmaria.webapp.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -38,7 +39,7 @@ public interface ApiProxy{
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     Collection<Book> getBooks();
 
-    @RequestMapping(value = "/books/{title}/{language}", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/{title}", method = RequestMethod.GET)
     Collection<Book> getBooksBySearch(@PathVariable("title") String title);
 
     //---------------------------------------------------------------------------
@@ -149,6 +150,9 @@ public interface ApiProxy{
     //---------------------------------------------------------------------------
 
     //User
+
+    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
+    ResponseEntity<?> createUser(@RequestBody User user);
 
     /**
      * Read - Get one user
