@@ -25,9 +25,9 @@ public class LoanService {
         return loan;
     }
 
-    public Loan createLoan(LoanForm loanForm){
+    public void createLoan(LoanForm loanForm){
         Loan loan = convertLoanFormToLoan(new Loan(), loanForm);
-        return apiProxy.createLoan(loan);
+        apiProxy.createLoan(loan);
     }
 
     public Loan getLoan(int id){

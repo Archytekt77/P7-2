@@ -20,7 +20,7 @@
       <div class="card border-dark mb-3">
         <div class="card-body">
           <h1 class="card-title">Création de votre profil</h1>
-          <form th:action="@{/users/create2}" th:object="${user}" method="post">
+          <form th:action="@{/users/create}" th:object="${user}" method="post">
             <div class="form-group row">
               <label class="col-6 col-form-label">Prénom</label>
               <input class="col-6 form-control" type="text" th:field="*{username}" required>

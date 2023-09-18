@@ -21,13 +21,13 @@
         <div class="card-body">
           <h1 class="card-title">Login</h1>
           <div th:if="${param.error}">
-            Email et mot de passe invalides.
+            Pseudo et/ou mot de passe invalide(s).
           </div>
 
 
           <form action="login.html" th:action="@{/login}" method="post">
             <div class="form-group row">
-              <label for="Username" class="col-sm-2 col-form-label">Username</label>
+              <label for="Username" class="col-sm-2 col-form-label">Pseudo</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="username" id="Username"
                        placeholder="Votre Nom"/>

@@ -12,15 +12,11 @@
                 <div class="card-body">
                     <h1 class="card-title">Chercher un livre</h1>
                     <form class="form-inline" action="detailsSomething.html"
-                          th:action="@{/books/${searchBook.title}/${searchBook.language}}"
+                          th:action="@{/books/${searchBook.title}}"
                           th:object="${searchBook}" method="post">
                         <div class="form-group mb-2">
                             <label class="sr-only">Titre</label>
                             <input class="form-control" type="text" th:field="*{title}" placeholder="Titre" required>
-                        </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label class="sr-only">Langue</label>
-                            <input class="form-control" type="text" th:field="*{language}" placeholder="Langue" required>
                         </div>
                         <button type="submit" class="btn btn-success mb-2">Chercher</button>
                     </form>
@@ -76,7 +72,6 @@
             <td scope="row" th:hidden="${book.id}"></td>
             <th th:text="${iter.count}"></th>
             <td th:text="${book.title}"></td>
-            <td th:text="${book.language}"></td>
             <td class="justify-content-center">
                 <a role="button" class="btn btn-primary"
                    th:href="@{/books/details(id=${book.id})}">Details</a>

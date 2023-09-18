@@ -24,9 +24,7 @@
     <div class="col-12">
       <div class="card border-dark mb-3">
         <div class="card-body">
-          <h1 class="card-title">Liste <span th:text="${title}"></span>
-            <a role="button" class="btn btn-secondary"
-               th:href="@{'/' + ${URL} + '/create'}">Ajouter</a></h1>
+          <h1 class="card-title">Liste <span th:text="${title}"></span></h1>
           <p class="card-text">
 
           <div th:replace="${fragment} :: table"></div>

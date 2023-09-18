@@ -26,7 +26,7 @@ public interface ApiProxy{
      *
      * @return - An Iterable object of Author full filled
      */
-    @RequestMapping(value = "/authors", method = RequestMethod.GET)
+    @RequestMapping(value = "/authors/all", method = RequestMethod.GET)
     Collection<Author> getAuthors();
 
     //---------------------------------------------------------------------------
@@ -36,7 +36,7 @@ public interface ApiProxy{
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     Book getBook(@PathVariable("id") int id);
 
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/all", method = RequestMethod.GET)
     Collection<Book> getBooks();
 
     @RequestMapping(value = "/books/{title}", method = RequestMethod.GET)
@@ -60,7 +60,7 @@ public interface ApiProxy{
      *
      * @return - An Iterable object of Copy full filled
      */
-    @RequestMapping(value = "/copies", method = RequestMethod.GET)
+    @RequestMapping(value = "/copies/all", method = RequestMethod.GET)
     Collection<Copy> getCopies();
 
     /**
@@ -84,8 +84,8 @@ public interface ApiProxy{
      * @param loan An object loan
      * @return The loan object saved
      */
-    @RequestMapping(value = "/loans", method = RequestMethod.POST)
-    Loan createLoan(@RequestBody Loan loan);
+    @RequestMapping(value = "/loans/create", method = RequestMethod.POST)
+    ResponseEntity<?> createLoan(@RequestBody Loan loan);
 
     /**
      * Read - Get one loan
@@ -101,7 +101,7 @@ public interface ApiProxy{
      *
      * @return - An Iterable object of Loan full filled
      */
-    @RequestMapping(value = "/loans", method = RequestMethod.GET)
+    @RequestMapping(value = "/loans/all", method = RequestMethod.GET)
     Collection<Loan> getLoans();
 
     /**
@@ -144,7 +144,7 @@ public interface ApiProxy{
      *
      * @return - An Iterable object of Type full filled
      */
-    @RequestMapping(value = "/types", method = RequestMethod.GET)
+    @RequestMapping(value = "/types/all", method = RequestMethod.GET)
     Collection<Type> getTypes();
 
     //---------------------------------------------------------------------------
@@ -163,7 +163,7 @@ public interface ApiProxy{
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     User getUser(@PathVariable("id") int id);
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/all", method = RequestMethod.GET)
     Collection<User> getUsers();
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
