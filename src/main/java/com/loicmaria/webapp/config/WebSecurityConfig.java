@@ -1,11 +1,17 @@
 package com.loicmaria.webapp.config;
 
+import com.loicmaria.webapp.config.security.MyUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
@@ -14,17 +20,29 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    private MyUserDetails userDetails;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        auth
+                .userDetailsService(userDetails)
+                .passwordEncoder(passwordEncoder());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers()
-                    .frameOptions().sameOrigin()
-                    .and()
+        http.csrf()
+                .disable()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.GET, "/", "/resources/**", "/js/**", "/css/**", "/images/**").permitAll()
-                // prevent spring security from blocking some pages that doesn't require authentication to be access here.
                     .antMatchers("/forgot-password", "/change-password").permitAll()
+                    .antMatchers("/mettreicilapageduprofilutilisateur").authenticated()
                     .anyRequest().permitAll()
                     .and()
                 // login configuration
@@ -44,4 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .exceptionHandling();
     }
+
+
 }

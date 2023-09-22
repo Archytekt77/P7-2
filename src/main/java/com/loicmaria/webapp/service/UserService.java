@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,14 +19,17 @@ import java.util.Collection;
 public class UserService {
 
     @Autowired
-    ApiProxy apiProxy;
+    private ApiProxy apiProxy;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public User convertUserFormToUser(UserForm userForm){
         User user = new User();
         user.setUsername(userForm.getUsername());
         user.setMail(userForm.getMail());
-        user.setPassword(userForm.getPassword());
+        user.setPassword(passwordEncoder.encode(userForm.getPassword()));
         return user;
     }
 
