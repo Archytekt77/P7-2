@@ -16,6 +16,7 @@ public class UserController {
 
     @ModelAttribute
     public void addAttributes(Model model){
+        model.addAttribute("user", userService.getLoggedUser());
     }
 
     /**
@@ -95,5 +96,9 @@ public class UserController {
         userService.deleteUser(id);
         return "user/deleteUser";
     }
+
+    // Réservations
+
+
 
 }

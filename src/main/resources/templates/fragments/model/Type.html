@@ -4,12 +4,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<th:block th:fragment="form">
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="name">Nom</label>
-    <input class="col-6 form-control" type="text" id="name" th:field="*{name}" required>
-  </div>
-</th:block>
 
 <th:block th:fragment="table">
   <table class="table table-dark table-responsive-md">
@@ -27,7 +21,7 @@
       <td th:text="${type.name}"></td>
       <td class="justify-content-center">
         <a role="button" class="btn btn-primary"
-           th:href="@{/types/details(id=${type.id})}">Details</a>
+           th:href="@{/types/(id=${type.id})}">Details</a>
       </td>
     </tr>
     </tbody>

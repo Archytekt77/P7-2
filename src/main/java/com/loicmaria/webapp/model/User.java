@@ -21,7 +21,7 @@ public class User  implements Serializable, UserDetails {
 
     private List<Role> roleList;
 
-    private Collection<Loan> loanCollection;
+    private Collection<Booking> bookingCollection;
 
 
     @Override

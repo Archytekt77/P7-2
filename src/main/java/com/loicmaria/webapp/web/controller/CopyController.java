@@ -38,13 +38,6 @@ public class CopyController {
         return "crud/detailsSomething";
     }
 
-    //Get all
-    @GetMapping
-    public String getCopys(Model model){
-        model.addAttribute("objectList", copyService.getCopies());
-        return "crud/getSomething";
-    }
-
     //Update
     @GetMapping("/edition")
     public String editionCopy(@RequestParam(value = "id") int id, Model model){

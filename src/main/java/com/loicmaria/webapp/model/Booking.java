@@ -4,7 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class Loan {
+public class Booking {
 
     private int id;
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <div th:replace="fragments/general :: head"></div>
+
+    <title>Liste Livres</title>
+</head>
+
+<body>
+<header>
+    <div th:replace="fragments/general :: nav"></div>
+</header>
+
+<div class="container">
+
+    <!--Chercher un livre-->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Chercher un livre</h1>
+                    <form class="form-inline" action="detailsSomething.html"
+                          th:action="@{/books/${searchBook.title}}"
+                          th:object="${searchBook}" method="post">
+                        <div class="form-group mb-2">
+                            <label class="sr-only">Titre</label>
+                            <input class="form-control" type="text" th:field="*{title}" placeholder="Titre" required>
+                        </div>
+                        <button type="submit" class="btn btn-success mb-2">Chercher</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Afficher les livres-->
+    <div class="row justify-content-center item">
+        <div class="col-12">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Liste des livres</h1>
+                    <p class="card-text">
+
+                    <table class="table table-dark table-responsive-md">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Langage</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book, iter : ${booksList}">
+                            <td scope="row" th:hidden="${book.id}"></td>
+                            <th th:text="${iter.count}"></th>
+                            <td th:text="${book.title}"></td>
+                            <td class="justify-content-center">
+                                <a role="button" class="btn btn-primary"
+                                   th:href="@{/books/details(id=${book.id})}">Details</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div th:if="${booksList.isEmpty()}" th:text="'Aucun livre'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>

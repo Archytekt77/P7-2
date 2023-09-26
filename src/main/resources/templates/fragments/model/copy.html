@@ -4,34 +4,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<th:block th:fragment="form">
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="copies">Nombre d'exemplaire</label>
-    <input class="col-6 form-control" type="number" id="copies" min="0" max="50" th:field="*{copies}" required>
-  </div>
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="publisherName">Éditeur</label>
-    <input class="col-6 form-control" type="text" id="publisherName" th:field="*{publisherName}" required>
-  </div>
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="publication">Date de publication</label>
-    <input class="col-6 form-control" type="text" id="publication" th:field="*{publicationDate}" required>
-  </div>
-  <div class="form-group row">
-    <label class="col-6 col-form-label">Livre, Langue</label>
-    <select th:field="*{idBook}">
-      <option th:value="0" selected>Aucun</option>
-      <option th:each="book : ${booksList}" th:value="${book.id}" th:text="${book.title} + ',' + ${book.language}"></option>
-    </select>
-  </div>
-  <div class="form-group row">
-    <label class="col-6 col-form-label">Genre</label>
-    <select th:field="*{idType}">
-      <option th:value="0" selected>Aucun</option>
-      <option th:each="type : ${typesList}" th:value="${type.id}" th:text="${type.name}"></option>
-    </select>
-  </div>
-</th:block>
 
 <th:block th:fragment="table">
   <table class="table table-dark table-responsive-md">
@@ -50,7 +22,7 @@
       <td th:text="${copy.publicationDate}"></td>
       <td class="justify-content-center">
         <a role="button" class="btn btn-primary"
-           th:href="@{/copies/details(id=${copy.id})}">Details</a>
+           th:href="@{/copies/(id=${copy.id})}">Details</a>
       </td>
     </tr>
     </tbody>

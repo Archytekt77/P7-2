@@ -55,5 +55,16 @@ public class UserService {
         apiProxy.deleteUser(id);
     }
 
+    /**
+     * <b>Permet d'avoir l'utilisateur connecté.</b>
+     * @return L'utilisateur connecté ou null si l'utilisateur n'est pas inscrit ou connecté.
+     */
+    public User getLoggedUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = this.apiProxy.getUserByUsername(username);
+        return user;
+    }
+
 
 }

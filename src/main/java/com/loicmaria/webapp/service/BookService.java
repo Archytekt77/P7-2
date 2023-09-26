@@ -25,7 +25,7 @@ public class BookService {
 
     /**
      * <b>Retourne une liste de livres pour le système de recherche.</b>
-     * Permet de trouver les livres en prenant le titre + la langue.
+     * Permet de trouver les livres en prenant le titre.
      * @param title Le titre du livre qui doit être trouvé.
      * @return Une liste de livres.
      */

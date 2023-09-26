@@ -21,13 +21,11 @@ public class CopyService {
         return apiProxy.getCopy(id);
     }
 
-    public Collection<Copy> getCopies(){
-        return apiProxy.getCopies();
-    }
-
     public Copy updateCopy(int id, Copy copy){
         return apiProxy.updateCopy(id, copy);
     }
+
+    public Collection<Copy> findByBook_Id(int id){return apiProxy.findByBook_Id(id);}
 
     
 }

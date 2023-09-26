@@ -3,6 +3,7 @@ package com.loicmaria.webapp.web.controller;
 import com.loicmaria.webapp.model.Book;
 import com.loicmaria.webapp.service.AuthorService;
 import com.loicmaria.webapp.service.BookService;
+import com.loicmaria.webapp.service.CopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +18,11 @@ public class BookController {
     @Autowired
     BookService bookService;
     @Autowired
-    AuthorService authorService;
+    CopyService copyService;
 
 
     @ModelAttribute
     public void addAttributes(Model model){
-        model.addAttribute("title", "Livre");
-        model.addAttribute("URL", "books");
         model.addAttribute("fragment", "fragments/model/book");
     }
 
@@ -31,17 +30,17 @@ public class BookController {
     //Get by ID
     @GetMapping("/details")
     public String getBookById(@RequestParam(value= "id") int id, Model model){
-        model.addAttribute("object", bookService.getBook(id));
-        return "crud/detailsSomething";
+        model.addAttribute("book", bookService.getBook(id));
+        model.addAttribute("copiesList", copyService.findByBook_Id(id));
+        return "book/detailsBook";
     }
 
     //Get all
     @GetMapping("/all")
     public String getBooks(Model model){
-        model.addAttribute("objectList", bookService.getBooks());
+        model.addAttribute("booksList", bookService.getBooks());
         model.addAttribute("searchBook", new Book());
-        model.addAttribute("searchSystem", "ok");
-        return "crud/getSomething";
+        return "book/getBooks";
     }
 
 

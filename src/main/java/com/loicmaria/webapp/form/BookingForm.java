@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class LoanForm {
+public class BookingForm {
 
     private String status;
 

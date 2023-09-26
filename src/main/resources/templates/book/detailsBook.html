@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/general :: head"></div>
+
+    <title>Détails livre</title>
+</head>
+
+<body>
+<header>
+    <div th:replace="fragments/general :: nav"></div>
+</header>
+
+<div class="container">
+
+    <!-- Tableau des détails du livre-->
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h1 class="card-title" th:text="'Détails du livre : ' + ${book.title}"></h1>
+
+                    <table class="table table-dark table-responsive-md" th:object="${book}">
+                        <thead>
+                        <tr>
+                            <th th:hidden="*{id}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Collection</th>
+                            <td th:text="*{collection}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Résumé</th>
+                            <td th:text="*{summary}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Langage</th>
+                            <td th:text="*{language}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date de parution</th>
+                            <td th:text="*{publicationDate}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Auteur</th>
+                            <td th:text="*{author.firstName + ' ' + author.lastName}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Afficher les exemplaires correspondant au livre-->
+    <div class="row justify-content-center item">
+        <div class="col-12">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Liste des exemplaires</h1>
+                    <p class="card-text">
+
+                    <table class="table table-dark table-responsive-md">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Éditeur</th>
+                            <th scope="col">Date de publication</th>
+                            <th scope="col">Nombre d'exemplaires disponibles</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="copy, iter : ${copyList}">
+                            <td scope="row" th:hidden="${copy.id}"></td>
+                            <th th:text="${iter.count}"></th>
+                            <td th:text="${copy.publisherName}"></td>
+                            <td th:text="${copy.publicationDate}"></td>
+                            <td th:text="${copy.copies}"></td>
+                            <td class="justify-content-center">
+                                <a role="button" class="btn btn-primary"
+                                   th:href="@{/books/details(id=${book.id})}">Réserver</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!--<div th:if="${copiesList.isEmpty()}" th:text="'Aucun exemplaire'"></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+</body>
+</html>

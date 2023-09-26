@@ -3,16 +3,6 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:fragment="form">
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="firstName">Prénom</label>
-    <input class="col-6 form-control" type="text" id="firstName" th:field="*{firstName}">
-  </div>
-  <div class="form-group row">
-    <label class="col-6 col-form-label" for="lastName">Nom de famille</label>
-    <input class="col-6 form-control" type="text" id="lastName" th:field="*{lastName}" required>
-  </div>
-</th:block>
 
 <th:block th:fragment="table">
   <table class="table table-dark table-responsive-md">
@@ -32,7 +22,7 @@
       <td th:text="${author.lastName}"></td>
       <td class="justify-content-center">
         <a role="button" class="btn btn-primary"
-           th:href="@{/authors/details(id=${author.id})}">Details</a>
+           th:href="@{/authors/id=${author.id}}">Details</a>
       </td>
     </tr>
     </tbody>

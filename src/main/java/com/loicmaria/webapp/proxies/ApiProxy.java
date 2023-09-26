@@ -18,7 +18,7 @@ public interface ApiProxy{
      * @param id The id of the author
      * @return An Author object full filled
      */
-    @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/authors/id/{id}", method = RequestMethod.GET)
     Author getAuthor(@PathVariable("id") int id);
 
     /**
@@ -33,13 +33,13 @@ public interface ApiProxy{
     
     //Book
 
-    @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
-    Book getBook(@PathVariable("id") int id);
+    @RequestMapping(value = "/books/id/{id}", method = RequestMethod.GET)
+    Book getBook(@RequestParam("id") int id);
 
     @RequestMapping(value = "/books/all", method = RequestMethod.GET)
     Collection<Book> getBooks();
 
-    @RequestMapping(value = "/books/{title}", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/title/{title}", method = RequestMethod.GET)
     Collection<Book> getBooksBySearch(@PathVariable("title") String title);
 
     //---------------------------------------------------------------------------
@@ -52,16 +52,8 @@ public interface ApiProxy{
      * @param id The id of the copy
      * @return An Copy object full filled
      */
-    @RequestMapping(value = "/copies/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/copies/id/{id}", method = RequestMethod.GET)
     Copy getCopy(@PathVariable("id") int id);
-
-    /**
-     * Read - Get all copies
-     *
-     * @return - An Iterable object of Copy full filled
-     */
-    @RequestMapping(value = "/copies/all", method = RequestMethod.GET)
-    Collection<Copy> getCopies();
 
     /**
      * Update - Update an existing copy
@@ -70,57 +62,60 @@ public interface ApiProxy{
      * @param copy - The copy object updated
      * @return The currentCopy if he is present or null
      */
-    @RequestMapping(value = "/copies/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/copies/id/{id}", method = RequestMethod.PUT)
     Copy updateCopy(@PathVariable("id") int id, @RequestBody Copy copy);
+
+    @RequestMapping(value = "/copies/book_id/{id}", method = RequestMethod.GET)
+    Collection<Copy> findByBook_Id(@PathVariable int id);
 
 
     //---------------------------------------------------------------------------
     
-    //Loan
+    //Booking
 
     /**
-     * Create - Add a new loan
+     * Create - Add a new booking
      *
-     * @param loan An object loan
-     * @return The loan object saved
+     * @param booking An object booking
+     * @return The booking object saved
      */
-    @RequestMapping(value = "/loans/create", method = RequestMethod.POST)
-    ResponseEntity<?> createLoan(@RequestBody Loan loan);
+    @RequestMapping(value = "/bookings/create", method = RequestMethod.POST)
+    ResponseEntity<?> createBooking(@RequestBody Booking booking);
 
     /**
-     * Read - Get one loan
+     * Read - Get one booking
      *
-     * @param id The id of the loan
-     * @return An Loan object full filled
+     * @param id The id of the booking
+     * @return An Booking object full filled
      */
-    @RequestMapping(value = "/loans/{id}", method = RequestMethod.GET)
-    Loan getLoan(@PathVariable("id") int id);
+    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.GET)
+    Booking getBooking(@PathVariable("id") int id);
 
     /**
-     * Read - Get all loans
+     * Read - Get all bookings
      *
-     * @return - An Iterable object of Loan full filled
+     * @return - An Iterable object of Booking full filled
      */
-    @RequestMapping(value = "/loans/all", method = RequestMethod.GET)
-    Collection<Loan> getLoans();
+    @RequestMapping(value = "/bookings/all", method = RequestMethod.GET)
+    Collection<Booking> getBookings();
 
     /**
-     * Update - Update an existing loan
+     * Update - Update an existing booking
      *
-     * @param id     - The id of the loan to update
-     * @param loan - The loan object updated
-     * @return The currentLoan if he is present or null
+     * @param id     - The id of the booking to update
+     * @param booking - The booking object updated
+     * @return The currentBooking if he is present or null
      */
-    @RequestMapping(value = "/loans/{id}", method = RequestMethod.PUT)
-    Loan updateLoan(@PathVariable("id") int id, @RequestBody Loan loan);
+    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.PUT)
+    Booking updateBooking(@PathVariable("id") int id, @RequestBody Booking booking);
 
     /**
-     * Delete - Delete an loan
+     * Delete - Delete an booking
      *
-     * @param id - The id of the loan to delete
+     * @param id - The id of the booking to delete
      */
-    @RequestMapping(value = "/loans/{id}", method = RequestMethod.DELETE)
-    void deleteLoan(@PathVariable("id") int id);
+    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.DELETE)
+    void deleteBooking(@PathVariable("id") int id);
 
     //---------------------------------------------------------------------------
 
@@ -136,7 +131,7 @@ public interface ApiProxy{
      * @param id The id of the type
      * @return An Type object full filled
      */
-    @RequestMapping(value = "/types/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/types/id/{id}", method = RequestMethod.GET)
     Type getType(@PathVariable("id") int id);
 
     /**
@@ -160,20 +155,20 @@ public interface ApiProxy{
      * @param id The id of the user
      * @return An User object full filled
      */
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/id/{id}", method = RequestMethod.GET)
     User getUser(@PathVariable("id") int id);
 
     @RequestMapping(value = "/users/all", method = RequestMethod.GET)
     Collection<User> getUsers();
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/users/id/{id}", method = RequestMethod.PUT)
     User updateUser(@PathVariable("id") int id, @RequestBody User user);
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/id/{id}", method = RequestMethod.DELETE)
     void deleteUser(@PathVariable("id") int id);
 
-    @RequestMapping(value = "/users/{username}}", method = RequestMethod.GET)
-    User findByUsername(@PathVariable("username") String username);
+    @RequestMapping(value = "/users/username/{username}", method = RequestMethod.GET)
+    User getUserByUsername(@PathVariable("username") String username);
 
 
 }
