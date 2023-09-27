@@ -14,10 +14,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ModelAttribute
-    public void addAttributes(Model model){
-        model.addAttribute("user", userService.getLoggedUser());
-    }
 
     /**
      * Afficher les détails de l'utilisateur connecté.
@@ -96,9 +92,5 @@ public class UserController {
         userService.deleteUser(id);
         return "user/deleteUser";
     }
-
-    // Réservations
-
-
 
 }

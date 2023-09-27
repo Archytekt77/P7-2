@@ -17,14 +17,6 @@ public class CopyService {
     ApiProxy apiProxy;
 
 
-    public Copy getCopy(int id){
-        return apiProxy.getCopy(id);
-    }
-
-    public Copy updateCopy(int id, Copy copy){
-        return apiProxy.updateCopy(id, copy);
-    }
-
     public Collection<Copy> findByBook_Id(int id){return apiProxy.findByBook_Id(id);}
 
     

@@ -10,27 +10,7 @@ import java.util.Collection;
 @FeignClient(name = "api", url = "localhost:9000")
 public interface ApiProxy{
 
-    //Author
 
-    /**
-     * Read - Get one author
-     *
-     * @param id The id of the author
-     * @return An Author object full filled
-     */
-    @RequestMapping(value = "/authors/id/{id}", method = RequestMethod.GET)
-    Author getAuthor(@PathVariable("id") int id);
-
-    /**
-     * Read - Get all authors
-     *
-     * @return - An Iterable object of Author full filled
-     */
-    @RequestMapping(value = "/authors/all", method = RequestMethod.GET)
-    Collection<Author> getAuthors();
-
-    //---------------------------------------------------------------------------
-    
     //Book
 
     @RequestMapping(value = "/books/id/{id}", method = RequestMethod.GET)
@@ -45,25 +25,6 @@ public interface ApiProxy{
     //---------------------------------------------------------------------------
     
     //Copy
-
-    /**
-     * Read - Get one copy
-     *
-     * @param id The id of the copy
-     * @return An Copy object full filled
-     */
-    @RequestMapping(value = "/copies/id/{id}", method = RequestMethod.GET)
-    Copy getCopy(@PathVariable("id") int id);
-
-    /**
-     * Update - Update an existing copy
-     *
-     * @param id     - The id of the copy to update
-     * @param copy - The copy object updated
-     * @return The currentCopy if he is present or null
-     */
-    @RequestMapping(value = "/copies/id/{id}", method = RequestMethod.PUT)
-    Copy updateCopy(@PathVariable("id") int id, @RequestBody Copy copy);
 
     @RequestMapping(value = "/copies/book_id/{id}", method = RequestMethod.GET)
     Collection<Copy> findByBook_Id(@PathVariable int id);
@@ -80,67 +41,21 @@ public interface ApiProxy{
      * @return The booking object saved
      */
     @RequestMapping(value = "/bookings/create", method = RequestMethod.POST)
-    ResponseEntity<?> createBooking(@RequestBody Booking booking);
+    ResponseEntity<?> createBooking(@RequestBody int userId,@RequestBody int copyId);
 
     /**
-     * Read - Get one booking
+     * Update - booking extension update
      *
-     * @param id The id of the booking
-     * @return An Booking object full filled
-     */
-    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.GET)
-    Booking getBooking(@PathVariable("id") int id);
-
-    /**
-     * Read - Get all bookings
-     *
-     * @return - An Iterable object of Booking full filled
-     */
-    @RequestMapping(value = "/bookings/all", method = RequestMethod.GET)
-    Collection<Booking> getBookings();
-
-    /**
-     * Update - Update an existing booking
-     *
-     * @param id     - The id of the booking to update
      * @param booking - The booking object updated
      * @return The currentBooking if he is present or null
      */
-    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.PUT)
-    Booking updateBooking(@PathVariable("id") int id, @RequestBody Booking booking);
+    @RequestMapping(value = "/bookings/extend", method = RequestMethod.PUT)
+    Booking extendBooking(@RequestBody Booking booking);
 
-    /**
-     * Delete - Delete an booking
-     *
-     * @param id - The id of the booking to delete
-     */
-    @RequestMapping(value = "/bookings/id/{id}", method = RequestMethod.DELETE)
-    void deleteBooking(@PathVariable("id") int id);
+    @RequestMapping(value = "/bookings/by_user_id/{id}", method = RequestMethod.GET)
+    Collection<Booking> getBookingsByUser(@PathVariable("id") int id, String status);
 
-    //---------------------------------------------------------------------------
 
-    //Role
-
-    //---------------------------------------------------------------------------
-
-    //Type
-
-    /**
-     * Read - Get one type
-     *
-     * @param id The id of the type
-     * @return An Type object full filled
-     */
-    @RequestMapping(value = "/types/id/{id}", method = RequestMethod.GET)
-    Type getType(@PathVariable("id") int id);
-
-    /**
-     * Read - Get all types
-     *
-     * @return - An Iterable object of Type full filled
-     */
-    @RequestMapping(value = "/types/all", method = RequestMethod.GET)
-    Collection<Type> getTypes();
 
     //---------------------------------------------------------------------------
 

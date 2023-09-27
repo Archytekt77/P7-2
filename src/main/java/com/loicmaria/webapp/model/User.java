@@ -29,11 +29,6 @@ public class User  implements Serializable, UserDetails {
         return null;
     }
 
-   /*@Override
-    public String getUsername() {
-        return null;
-    }*/
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

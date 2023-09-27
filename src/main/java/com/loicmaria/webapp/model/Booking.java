@@ -16,7 +16,7 @@ public class Booking {
 
     private LocalDateTime updateDate;
 
-    private Book book;
+    private Copy copy;
 
     private User user;
 }

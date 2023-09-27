@@ -30,20 +30,12 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row">Collection</th>
-                            <td th:text="*{collection}"></td>
-                        </tr>
-                        <tr>
                             <th scope="row">Résumé</th>
                             <td th:text="*{summary}"></td>
                         </tr>
                         <tr>
-                            <th scope="row">Langage</th>
-                            <td th:text="*{language}"></td>
-                        </tr>
-                        <tr>
                             <th scope="row">Date de parution</th>
-                            <td th:text="*{publicationDate}"></td>
+                            <td th:text="*{#dates.format(publicationDate, 'MM yyyy')}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Auteur</th>
@@ -70,27 +62,33 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Éditeur</th>
+                            <th scope="col">Langue</th>
+                            <th scope="col">Collection</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Date de publication</th>
-                            <th scope="col">Nombre d'exemplaires disponibles</th>
+                            <th scope="col">Exemplaires disponibles</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="copy, iter : ${copyList}">
+                        <tr th:each="copy, iter : ${copiesList}">
                             <td scope="row" th:hidden="${copy.id}"></td>
                             <th th:text="${iter.count}"></th>
                             <td th:text="${copy.publisherName}"></td>
-                            <td th:text="${copy.publicationDate}"></td>
+                            <td th:text="${copy.language}"></td>
+                            <td th:text="${copy.collection}"></td>
+                            <td th:text="${copy.type.name}"></td>
+                            <td th:text="${#dates.format(copy.publicationDate, 'MM yyyy')}"></td>
                             <td th:text="${copy.copies}"></td>
                             <td class="justify-content-center">
                                 <a role="button" class="btn btn-primary"
-                                   th:href="@{/books/details(id=${book.id})}">Réserver</a>
+                                   th:href="@{/bookings/create}">Réserver</a>       <!-- Refaire le lien pour la création de la réservation -->
                             </td>
                         </tr>
                         </tbody>
                     </table>
 
-                    <!--<div th:if="${copiesList.isEmpty()}" th:text="'Aucun exemplaire'"></div>-->
+                    <div th:if="${copiesList.isEmpty()}" th:text="'Aucun exemplaire'"></div>
                 </div>
             </div>
         </div>
