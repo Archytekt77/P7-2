@@ -37,11 +37,12 @@ public interface ApiProxy{
     /**
      * Create - Add a new booking
      *
-     * @param booking An object booking
+     * @param userId
+     * @param copyId
      * @return The booking object saved
      */
-    @RequestMapping(value = "/bookings/create", method = RequestMethod.POST)
-    ResponseEntity<?> createBooking(@RequestBody int userId,@RequestBody int copyId);
+   /* @RequestMapping(value = "/bookings/create", method = RequestMethod.POST)
+    ResponseEntity<?> createBooking(@RequestBody int userId,@RequestBody int copyId);*/
 
     /**
      * Update - booking extension update
@@ -53,7 +54,7 @@ public interface ApiProxy{
     Booking extendBooking(@RequestBody Booking booking);
 
     @RequestMapping(value = "/bookings/by_user_id/{id}", method = RequestMethod.GET)
-    Collection<Booking> getBookingsByUser(@PathVariable("id") int id, String status);
+    Collection<Booking> getBookingsByUser_IdAndStatus(@PathVariable("id") int id, String status);
 
 
 

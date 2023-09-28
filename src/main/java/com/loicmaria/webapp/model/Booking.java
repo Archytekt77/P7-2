@@ -1,7 +1,8 @@
 package com.loicmaria.webapp.model;
 
 import lombok.Data;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Data
 public class Booking {
@@ -10,11 +11,11 @@ public class Booking {
 
     private String status;
 
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
     private boolean extraTime;
-
-    private LocalDateTime createDate;
-
-    private LocalDateTime updateDate;
 
     private Copy copy;
 

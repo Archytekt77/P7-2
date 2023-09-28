@@ -14,13 +14,18 @@ public class BookingService {
     
     @Autowired
     ApiProxy apiProxy;
-    @Autowired
-    UserService userService;
-    @Autowired
-    CopyService copyService;
 
-    public void createBooking(int userId, int copyId){
+
+    /*public void createBooking(int userId, int copyId){
         apiProxy.createBooking(userId, copyId);
+    }*/
+
+    public Booking extendBooking(Booking booking){
+        return apiProxy.extendBooking(booking);
+    }
+
+    public Collection<Booking> findByUser_IdAndStatus(int userId, String status){
+        return apiProxy.getBookingsByUser_IdAndStatus(userId, status);
     }
 
 
