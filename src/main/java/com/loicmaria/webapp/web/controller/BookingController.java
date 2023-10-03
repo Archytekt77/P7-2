@@ -1,6 +1,7 @@
 package com.loicmaria.webapp.web.controller;
 
-import com.loicmaria.webapp.model.Booking;
+import com.loicmaria.webapp.model.Book;
+import com.loicmaria.webapp.service.BookService;
 import com.loicmaria.webapp.service.BookingService;
 import com.loicmaria.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,23 @@ public class BookingController {
     BookingService bookingService;
     @Autowired
     UserService userService;
+    @Autowired
+    BookService bookService;
 
 
-    @PostMapping("/create")
-    public String addBooking(@RequestBody int userId, @RequestBody int copyId) {
-       // bookingService.createBooking(userId, copyId);
+    @PostMapping("/create/{copyId}")
+    public String addBooking(@PathVariable int copyId, Model model) {
+        int userId = userService.getLoggedUser().getId();
+        bookingService.createBooking(userId, copyId);
+        model.addAttribute("booksList", bookService.getBooks());
+        model.addAttribute("searchBook", new Book());
         return "book/getBooks";
     }
 
 
-    @PutMapping("/extend")
-    public String extendBooking(@RequestBody Booking booking){
-        bookingService.extendBooking(booking);
+    @PutMapping("/extend/{id}")
+    public String extendBooking(@PathVariable("id") int bookingId){
+        bookingService.extendBooking(bookingId);
         return "";
     }
 

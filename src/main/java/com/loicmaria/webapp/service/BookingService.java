@@ -16,12 +16,12 @@ public class BookingService {
     ApiProxy apiProxy;
 
 
-    /*public void createBooking(int userId, int copyId){
+    public void createBooking(int userId, int copyId){
         apiProxy.createBooking(userId, copyId);
-    }*/
+    }
 
-    public Booking extendBooking(Booking booking){
-        return apiProxy.extendBooking(booking);
+    public Booking extendBooking(int bookingId){
+        return apiProxy.extendBooking(bookingId);
     }
 
     public Collection<Booking> findByUser_IdAndStatus(int userId, String status){

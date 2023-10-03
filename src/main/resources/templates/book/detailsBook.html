@@ -72,7 +72,6 @@
                         </thead>
                         <tbody>
                         <tr th:each="copy, iter : ${copiesList}">
-                            <td scope="row" th:hidden="${copy.id}"></td>
                             <th th:text="${iter.count}"></th>
                             <td th:text="${copy.publisherName}"></td>
                             <td th:text="${copy.language}"></td>
@@ -82,7 +81,7 @@
                             <td th:text="${copy.copies}"></td>
                             <td class="justify-content-center">
                                 <a role="button" class="btn btn-primary"
-                                   th:href="@{/bookings/create}">Réserver</a>       <!-- Refaire le lien pour la création de la réservation -->
+                                   th:href="@{/bookings/create/(copyId = ${copy.id})}">Réserver</a>       <!-- Refaire le lien pour la création de la réservation -->
                             </td>
                         </tr>
                         </tbody>

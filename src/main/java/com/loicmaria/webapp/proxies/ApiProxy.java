@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.spec.PSource;
 import java.util.Collection;
 
 @FeignClient(name = "api", url = "localhost:9000")
@@ -41,22 +42,20 @@ public interface ApiProxy{
      * @param copyId
      * @return The booking object saved
      */
-   /* @RequestMapping(value = "/bookings/create", method = RequestMethod.POST)
-    ResponseEntity<?> createBooking(@RequestBody int userId,@RequestBody int copyId);*/
+    @RequestMapping(value = "/bookings/create/{userId}/{copyId}", method = RequestMethod.POST)
+    ResponseEntity<?> createBooking(@PathVariable int userId,@PathVariable int copyId);
 
     /**
      * Update - booking extension update
      *
-     * @param booking - The booking object updated
+     * @param bookingId - The id of the booking object updated
      * @return The currentBooking if he is present or null
      */
-    @RequestMapping(value = "/bookings/extend", method = RequestMethod.PUT)
-    Booking extendBooking(@RequestBody Booking booking);
+    @RequestMapping(value = "/bookings/extend/{id}", method = RequestMethod.PUT)
+    Booking extendBooking(@PathVariable("id") int bookingId);
 
     @RequestMapping(value = "/bookings/by_user_id/{id}", method = RequestMethod.GET)
     Collection<Booking> getBookingsByUser_IdAndStatus(@PathVariable("id") int id, String status);
-
-
 
     //---------------------------------------------------------------------------
 

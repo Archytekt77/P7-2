@@ -3,6 +3,7 @@ package com.loicmaria.webapp.web.controller;
 import com.loicmaria.webapp.model.Book;
 import com.loicmaria.webapp.service.BookService;
 import com.loicmaria.webapp.service.CopyService;
+import com.loicmaria.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ public class BookController {
     BookService bookService;
     @Autowired
     CopyService copyService;
+    @Autowired
+    UserService userService;
 
 
     /**
@@ -41,6 +44,7 @@ public class BookController {
      */
     @GetMapping("/details")
     public String getBook(@RequestParam(value = "id") int id, Model model) {
+        model.addAttribute("user", userService.getLoggedUser());
         model.addAttribute("book", bookService.getBook(id));
         model.addAttribute("copiesList", copyService.findByBook_Id(id));
         return "book/detailsBook";
