@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+
 @Data
 @Service
 public class BookingService {
@@ -24,8 +25,8 @@ public class BookingService {
         return apiProxy.extendBooking(bookingId);
     }
 
-    public Collection<Booking> findByUser_IdAndStatus(int userId, String status){
-        return apiProxy.getBookingsByUser_IdAndStatus(userId, status);
+    public Collection<Booking> findByUserAndStatus(int userId, String status){
+        return apiProxy.getBookingsByUserAndStatus(userId, status);
     }
 
 

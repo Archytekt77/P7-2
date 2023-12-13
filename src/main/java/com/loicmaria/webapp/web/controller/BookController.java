@@ -22,12 +22,6 @@ public class BookController {
     UserService userService;
 
 
-    /**
-     * Afficher tous les livres.
-     *
-     * @param model Contient les données à afficher.
-     * @return Affiche la liste des livres.
-     */
     @GetMapping("/all")
     public String getBooks(Model model) {
         model.addAttribute("booksList", bookService.getBooks());
@@ -35,13 +29,6 @@ public class BookController {
         return "book/getBooks";
     }
 
-    /**
-     * Afficher le détail d'un livre avec ses exemplaires correspondants.
-     *
-     * @param id    L'id du livre.
-     * @param model Contient les données à afficher.
-     * @return La page détail du livre.
-     */
     @GetMapping("/details")
     public String getBook(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("user", userService.getLoggedUser());
@@ -50,14 +37,7 @@ public class BookController {
         return "book/detailsBook";
     }
 
-
-    /**
-     * Afficher la liste des livres avec le système de recherche.
-     *
-     * @param title Le titre du livre recherché.
-     * @param model Contient les données à afficher.
-     * @return La page avec la liste des livres.
-     */
+    //  Système de recherche de livres
     @PostMapping("/{title}")
     public String getBooksBySearch(String title, Model model) {
         Book book = new Book();

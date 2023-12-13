@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <div th:replace="fragments/general :: head"></div>
@@ -33,56 +32,49 @@
               <th scope="col">Exemplaire</th>
               <th scope="col">Date de début</th>
               <th scope="col">Date de fin</th>
-              <th scope="col"></th>
+              <th scope="col">Action</th>
 
             </tr>
             </thead>
 
             <tbody>
-            <!-- En attente de réponse
-            <th scope="row" th:unless="${nullBookings.isEmpty()}">Vous n'avez pas de réservation</th>
-            <tr th:each="booking, iter : ${nullBookings}">
-              <th scope="row" th:hidden="${booking.id}"></th>
-              <th th:text="${iter.count}"></th>
-              <td th:text="${booking.topo.name}"></td>
-              <td class="justify-content-center">
-                <a role="button" class="btn btn-primary"
-                   th:href="@{/topo/details(id=${booking.topo.id})}">Accéder au topo</a>
-              </td>
-            </tr>-->
-
             <!-- En cours -->
             <th scope="row" th:unless="${inProgressBookings.isEmpty()}">En cours</th>
             <tr th:each="booking, iter : ${inProgressBookings}">
               <th scope="row" th:hidden="${booking.id}"></th>
               <th th:text="${iter.count}"></th>
-              <td th:text="${booking.startDate}"></td>
+              <td th:text="${booking.getCopy().getBook().getTitle()}"></td>
               <td th:text="${booking.startDate}"></td>
               <td th:text="${booking.endDate}"></td>
-
+              <td class="justify-content-center">
+                <form th:action="@{/bookings/extend}" method="post">
+                  <input type="hidden" name="bookingId" th:value="${booking.id}">
+                  <button type="submit" class="btn btn-primary">Prolonger</button>
+                </form></td>
             </tr>
 
-            <!-- Finis
+            <!-- Prolongé -->
+            <th scope="row" th:unless="${extendBookings.isEmpty()}">Prolongé</th>
+            <tr th:each="booking, iter : ${extendBookings}">
+              <th scope="row" th:hidden="${booking.id}"></th>
+              <th th:text="${iter.count}"></th>
+              <td th:text="${booking.getCopy().getBook().getTitle()}"></td>
+              <td th:text="${booking.startDate}"></td>
+              <td th:text="${booking.endDate}"></td>
+            </tr>
 
-            <td>
-                                <a role="button" class="btn btn-primary"
-                                   th:href="@{/climbing-site/details(id=${climbingSite.id})}">Details</a>
-                            </td>
+             <!-- Finis -->
             <th scope="row" th:unless="${finishedBookings.isEmpty()}">Finis</th>
             <tr th:each="booking, iter : ${finishedBookings}">
               <th scope="row" th:hidden="${booking.id}"></th>
               <th th:text="${iter.count}"></th>
-              <td th:text="${booking.topo.name}"></td>
-              <td class="justify-content-center">
-                <a role="button" class="btn btn-primary"
-                   th:href="@{/topo/details(id=${booking.topo.id})}">Accéder au topo</a>
-              </td>
-              <td th:text="${booking.answer} == 'refused'?'Refusé':'Accepté'"></td>
+              <td th:text="${booking.getCopy().getBook().getTitle()}"></td>
+              <td th:text="${booking.startDate}"></td>
+              <td th:text="${booking.endDate}"></td>
             </tr>
-            </tr>-->
             </tbody>
           </table>
-          <div th:if="${inProgressBookings.isEmpty() and ${extendBookings.isEmpty()} and finishedBookings.isEmpty()}" th:text="'Vous n\'avez fait aucune réservation'"></div>-->
+          <div th:if="${inProgressBookings.isEmpty() and extendBookings.isEmpty() and finishedBookings.isEmpty()}" th:text="'Vous n\'avez fait aucune réservation'"></div>
         </div>
       </div>
     </div>

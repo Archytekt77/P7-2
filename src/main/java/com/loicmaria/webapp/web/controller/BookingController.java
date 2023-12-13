@@ -21,8 +21,8 @@ public class BookingController {
     BookService bookService;
 
 
-    @PostMapping("/create/{copyId}")
-    public String addBooking(@PathVariable int copyId, Model model) {
+    @PostMapping("/create")
+    public String addBooking(@RequestParam("copyId") int copyId, Model model) {
         int userId = userService.getLoggedUser().getId();
         bookingService.createBooking(userId, copyId);
         model.addAttribute("booksList", bookService.getBooks());
@@ -30,22 +30,22 @@ public class BookingController {
         return "book/getBooks";
     }
 
-
-    @PutMapping("/extend/{id}")
-    public String extendBooking(@PathVariable("id") int bookingId){
+    @PostMapping("/extend")
+    public String extendBooking(@RequestParam("bookingId") int bookingId, Model model){
         bookingService.extendBooking(bookingId);
-        return "";
+        int userId = userService.getLoggedUser().getId();
+        model.addAttribute("inProgressBookings", bookingService.findByUserAndStatus(userId, "inProgress"));
+        model.addAttribute("extendBookings", bookingService.findByUserAndStatus(userId,"extend"));
+        model.addAttribute("finishedBookings", bookingService.findByUserAndStatus(userId, "finish"));
+        return "getBookings";
     }
-
-
-
 
     @GetMapping("/get")
     public String getBookingsByUser(Model model){
         int userId = userService.getLoggedUser().getId();
-        model.addAttribute("inProgressBookings", bookingService.findByUser_IdAndStatus(userId, "inProgress"));
-        model.addAttribute("extendBookings", bookingService.findByUser_IdAndStatus(userId,"extend"));
-        model.addAttribute("finishedBookings", bookingService.findByUser_IdAndStatus(userId, "finish"));
+        model.addAttribute("inProgressBookings", bookingService.findByUserAndStatus(userId, "inProgress"));
+        model.addAttribute("extendBookings", bookingService.findByUserAndStatus(userId,"extend"));
+        model.addAttribute("finishedBookings", bookingService.findByUserAndStatus(userId, "finish"));
         return "getBookings";
     }
 

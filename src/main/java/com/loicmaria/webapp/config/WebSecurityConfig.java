@@ -42,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(HttpMethod.GET, "/", "/resources/**", "/js/**", "/css/**", "/images/**").permitAll()
                     .antMatchers("/forgot-password", "/change-password").permitAll()
-                    .antMatchers("/mettreicilapageduprofilutilisateur").authenticated()
                     .anyRequest().permitAll()
                     .and()
                 // login configuration

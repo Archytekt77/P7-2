@@ -80,8 +80,10 @@
                             <td th:text="${#dates.format(copy.publicationDate, 'MM yyyy')}"></td>
                             <td th:text="${copy.copies}"></td>
                             <td class="justify-content-center">
-                                <a role="button" class="btn btn-primary"
-                                   th:href="@{/bookings/create/(copyId = ${copy.id})}">Réserver</a>       <!-- Refaire le lien pour la création de la réservation -->
+                                <form th:action="@{/bookings/create}" method="post">
+                                    <input type="hidden" name="copyId" th:value="${copy.id}">
+                                    <button type="submit" class="btn btn-primary">Réserver</button>
+                                </form>
                             </td>
                         </tr>
                         </tbody>

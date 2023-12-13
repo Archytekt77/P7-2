@@ -15,21 +15,11 @@ public class UserController {
     UserService userService;
 
 
-    /**
-     * Afficher les détails de l'utilisateur connecté.
-     * @return La page de détails.
-     */
-
-    @GetMapping("/id")
-    public String getUserById(){
+    @GetMapping("/details")
+    public String getUserById(Model model){
+        model.addAttribute("user", userService.getLoggedUser());
         return "user/detailsUser";
     }
-
-    /**
-     * Afficher le formulaire pour créer un utilisateur.
-     * @param model Contient les données à afficher.
-     * @return La page de création d'un utilisateur.
-     */
 
     @GetMapping("/create")
     public String userForm(Model model){
@@ -37,60 +27,10 @@ public class UserController {
         return "user/createUser";
     }
 
-    /**
-     * Créer un nouvel utilisateur.
-     * @param userForm Les informations à intégrer à son compte.
-     * @return La page de connexion.
-     */
-
     @PostMapping("/create")
     public String createUser(@ModelAttribute UserForm userForm){
         userService.createUser(userForm);
         return "login";
-    }
-
-    /**
-     * Afficher la page pour modifier l'utilisateur connecté.
-     * @param id L'ID du compte utilisateur à modifier.
-     * @param model Contient les données à afficher.
-     * @return La page avec le formulaire permettant la modification.
-     */
-
-    @GetMapping("/edition")
-    public String userEditForm(@RequestParam(value = "id") int id, Model model){
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("id", id);
-        return "user/editionUser";
-    }
-
-    /**
-     *  Modifier l'utilisateur connecté.
-     * @param id L'ID du compte utilisateur à modifier.
-     * @param model Contient les données à afficher.
-     * @param userForm Les informations à intégrer au compte utilisateur.
-     * @return La page détail de l'utilisateur connecté.
-     */
-
-    @PutMapping("/edition/{id}")
-    public String updateUser(@PathVariable(value = "id") int id, Model model, UserForm userForm){
-        userService.updateUser(id, userForm);
-        model.addAttribute("user", userService.getUser(id));
-        System.out.println("Édition user");
-        return "user/detailsUser";
-    }
-
-    /**
-     * Supprimer le compte d'un utilisateur connecté.
-     * @param id L'ID du compte à supprimer.
-     * @param model Contient les données à afficher.
-     * @return La page confirmant la suppression du compte.
-     */
-
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id") int id, Model model){
-        model.addAttribute("user", userService.getUser(id));
-        userService.deleteUser(id);
-        return "user/deleteUser";
     }
 
 }
