@@ -20,7 +20,6 @@
         <spring-cloud.version>2020.0.3</spring-cloud.version>
         <bootstrap.version>4.2.1</bootstrap.version>
         <modelmapper.version>2.3.5</modelmapper.version>
-        <thymeleaf.version>3.0.4.RELEASE</thymeleaf.version>
         <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
@@ -83,7 +82,7 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-            <version>${thymeleaf.version}</version>
+            <version>3.0.4.RELEASE</version>
         </dependency>
 
 
